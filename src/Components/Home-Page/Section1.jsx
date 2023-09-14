@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import css from "../../CSS/Section1.module.css";
 import { cardsData, logoData } from "../../Data/data";
 import { ArrowLeft, ArrowRight } from "../../Data/Icons";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
 const Section1 = () => {
   return (

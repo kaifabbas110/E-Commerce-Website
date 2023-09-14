@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import css from "../../CSS/FeatureProduct.module.css";
-import { featureProductData } from "../../Data/data";
 import { BagHeart } from "../../../img/logo/Socials";
 import {
   addToCart,
@@ -9,7 +8,6 @@ import {
 } from "../../Cart/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getProductById } from "../../Cart/filter";
 
 const FeatureProduct = () => {
   const { CartOnHover, FeatureItems } = useSelector((store) => store.cart);
