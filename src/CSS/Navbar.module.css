@@ -1,0 +1,232 @@
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: orangered;
+}
+ul {
+  list-style-type: none;
+}
+/* svg:not(.hamburger) {
+  height: 2.2rem;
+  fill: white;
+} */
+img {
+  height: 5rem;
+  margin-right: 3rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #146394cf;
+  padding: 3rem 2rem;
+  color: white;
+  position: relative;
+  /* position: fixed; */
+  z-index: 99;
+  width: 100%;
+}
+
+.header_left,
+.header_right {
+  display: flex;
+  align-items: center;
+  > ul {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    @media only screen and (min-width: 48.01em) {
+      .hamburger {
+        display: none;
+      }
+    }
+    > li > button {
+      padding: 1rem;
+      background-color: transparent;
+      > svg {
+        height: 2.5rem;
+        fill: white;
+      }
+    }
+    @media only screen and (max-width: 48em) {
+      > li:not(.notHidden) {
+        display: none;
+      }
+      .mobileView {
+        display: none;
+      }
+      /* > li:last-of-type { */
+      /* margin-left: 2rem; */
+      /* } */
+    }
+  }
+  .BagHeart {
+    position: relative;
+  }
+}
+.totalCarts {
+  background-color: white;
+  color: black;
+  font-size: 2rem;
+  border-radius: 50%;
+  padding: 0.3rem 0.8rem;
+  position: absolute;
+  top: -10%;
+  right: -10%;
+}
+
+.hamburger {
+  > button {
+    background-color: black;
+    padding: 0.8rem;
+    cursor: pointer;
+  }
+}
+
+.hamburgerShow {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 90vw;
+  z-index: 99;
+  background-color: #faf7f7;
+  overflow: scroll;
+
+  > ul {
+    text-transform: capitalize;
+    > li {
+      font-size: 3rem;
+      padding: 5rem;
+      border-top: 1px solid black;
+      > a {
+        color: black;
+        text-decoration: none;
+      }
+    }
+    > li:nth-child(6) {
+      background-color: white;
+    }
+    > button {
+      background-color: transparent;
+      cursor: pointer;
+      > svg {
+        height: 10rem;
+        margin: 10rem 5rem;
+      }
+    }
+  }
+}
+
+.hamburgerHide {
+  background-color: transparent;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  padding: 0.8rem;
+  > svg {
+    height: 5rem;
+    color: black;
+  }
+}
+.AddToCartShow {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: white;
+  color: black;
+  z-index: 99;
+  width: 70vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  /* overflow: scroll; */
+
+  /* justify-content: space-between; */
+}
+.upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  border-bottom: 1px solid black;
+  width: 100%;
+  > h3 {
+    text-transform: capitalize;
+    font-size: 2rem;
+  }
+}
+.lower {
+  margin-top: auto;
+  width: 100%;
+}
+
+.lower_1 {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 2rem;
+  font-size: 2rem;
+}
+.lower_2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  > a > button {
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: rgba(0, 0, 255, 0.612);
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 1.5rem 0;
+  }
+}
+.AddToCartHide {
+  background-color: transparent;
+  > svg {
+    height: 3rem;
+    fill: black;
+  }
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+.cartItems {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cartItems_img {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  > img {
+    height: 10rem;
+    width: 10rem;
+  }
+}
+
+.cartItems_info {
+  /* display: flex; */
+  /* justify-content: end; */
+  /* align-items: end; */
+  text-align: end;
+
+  /* flex-direction: column; */
+  gap: 1rem;
+}

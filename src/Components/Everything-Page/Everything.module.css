@@ -1,0 +1,283 @@
+.mainEverything {
+  background-color: #f5f7f9;
+  display: block;
+}
+.everything {
+  display: grid;
+  grid-template-columns: 25rem 1fr;
+  padding: 5rem 2rem;
+  @media only screen and (max-width: 48em) {
+    display: block;
+  }
+}
+.filterSection {
+  padding: 0 2rem 0 0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  gap: 2rem;
+  @media only screen and (max-width: 26.5625em) {
+    width: 100%;
+    display: block;
+  }
+}
+.priceRange {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.priceRangeValues {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-transform: capitalize;
+  font-size: 2rem;
+}
+.filterSection1 {
+  display: flex;
+  gap: 1rem;
+  > input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+  > button {
+    background-color: #0075be;
+    height: 100%;
+    > svg {
+      height: 2rem;
+      width: 4rem;
+      color: white;
+    }
+  }
+}
+.h11 {
+  font-size: 5rem;
+}
+.filterSection2 {
+  text-transform: capitalize;
+  @media only screen and (max-width: 26.5625em) {
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  > div > div > h1 {
+    font-size: 4rem;
+  }
+}
+.filterSection2Category {
+  line-height: 4rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.everythingProductGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(10rem, 50rem));
+  justify-content: center;
+  gap: 3rem;
+  /* position: relative; */
+
+  @media only screen and (max-width: 48em) {
+    grid-template-columns: repeat(3, minmax(25rem, 35rem));
+  }
+  @media only screen and (max-width: 31.2em) {
+    grid-template-columns: repeat(2, minmax(10rem, 35rem));
+  }
+  @media only screen and (max-width: 23.4375em) {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 45rem));
+  }
+}
+.wholecard {
+  border: 1px solid black;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  > img {
+    height: 100%;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+}
+
+.addToCart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  padding: 1rem;
+  background-color: white;
+  margin: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > svg {
+    height: 2rem;
+  }
+}
+
+.card_info {
+  line-height: 3rem;
+  padding: 2rem 1rem;
+  text-transform: capitalize;
+  > h3 {
+    font-size: 2.8rem;
+    color: rgba(0, 0, 0, 0.807);
+  }
+  > p {
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.216);
+    font-size: 1.8rem;
+  }
+  > span {
+    color: black;
+    font-size: 2rem;
+  }
+}
+
+.addToCart:hover {
+  background-color: white;
+}
+.addToCart:hover::before {
+  content: "Add To Cart";
+  position: absolute;
+  top: 5%;
+  right: 100%;
+  height: max-content;
+  width: max-content;
+  color: white;
+  background-color: black;
+  padding: 1rem;
+  margin: 0 1rem;
+  z-index: 1;
+  border-radius: 0.4rem;
+}
+.addToCart:hover::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 55%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-color: black;
+  clip-path: polygon(0% 20%, 60% 20%, 100% 50%, 60% 80%, 0% 80%);
+}
+
+.hidden {
+  display: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5rem 0;
+  > button {
+    font-size: 2.5rem;
+    background-color: #0075be;
+    padding: 1rem 2rem;
+    color: white;
+  }
+  > span {
+    font-size: 5rem;
+    padding: 0rem 2rem;
+  }
+}
+.everythingProduct {
+  flex: 1;
+  padding: 10rem 5rem;
+  background-color: white;
+}
+
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* position: relative; */
+
+  > h1 {
+    font-size: 5rem;
+    margin-right: 1rem;
+  }
+  .buffer {
+    position: relative;
+    top: 0%;
+    left: 3%;
+    animation: spin 3s ease infinite;
+
+    > div:nth-of-type(1) {
+      /* border-bottom: 0.2rem solid blue; */
+      height: 2rem;
+      width: 2rem;
+      border: 50%;
+      background-color: blue;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      border-radius: 50%;
+      margin: 0.4rem;
+    }
+    > div:nth-of-type(2) {
+      height: 2rem;
+      width: 2rem;
+      border: 50%;
+      background-color: yellow;
+      position: absolute;
+      top: 0%;
+      right: 0%;
+      border-radius: 50%;
+      margin: 0.4rem;
+    }
+    > div:nth-of-type(3) {
+      height: 2rem;
+      width: 2rem;
+      border: 50%;
+      background-color: orangered;
+      position: absolute;
+      bottom: 0%;
+      left: 0%;
+      border-radius: 50%;
+      margin: 0.4rem;
+    }
+    > div:nth-of-type(5) {
+      height: 2rem;
+      width: 2rem;
+      border: 50%;
+      background-color: brown;
+      position: absolute;
+      bottom: 0%;
+      right: 0%;
+      border-radius: 50%;
+      margin: 0.4rem;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.noResult {
+  height: 100vh;
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: start;
+
+  > h1 {
+    font-size: 5rem;
+    text-transform: uppercase;
+  }
+}

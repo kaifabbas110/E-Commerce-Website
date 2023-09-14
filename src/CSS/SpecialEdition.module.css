@@ -1,0 +1,89 @@
+.SpecialEdition {
+  position: relative;
+
+  /* background-image: url("../../img/banner/banner-03.jpg"); */
+  /* background-color: blue; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 8rem;
+  color: white;
+  background-attachment: fixed;
+  @media only screen and (max-width: 48em) {
+    background-attachment: scroll;
+  }
+  /* width: fit-content; */
+  /* height: 100%; */
+  /* width: 100%; */
+}
+.layOut {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  background-image: linear-gradient(to right, #0084d6 0%, #00000000 100%);
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+}
+
+.info {
+  position: relative;
+  @media only screen and (max-width: 37.5em) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  > h3 {
+    font-size: 3rem;
+  }
+  > h1 {
+    font-size: 5rem;
+  }
+  > p {
+    font-size: 1.8rem;
+    line-height: 3rem;
+  }
+  > h2 {
+    font-size: 2rem;
+  }
+  > button {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1.5rem 2.5rem;
+  }
+  > * {
+    margin: 2rem 0;
+    /* margin-left: auto; */
+    /* gap: 8rem; */
+    /* line-height: 10rem; */
+  }
+}
+
+.weOffer {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  margin: 10rem;
+  justify-content: center;
+  text-align: center;
+  gap: 5rem;
+  @media only screen and (max-width: 48em) {
+    grid-template-columns: repeat(2, auto);
+  }
+  @media only screen and (max-width: 26.5625em) {
+    grid-template-columns: repeat(1, auto);
+  }
+}
+.weOffer_info {
+  > * {
+    margin: 1rem 0;
+  }
+  > h1 {
+    font-size: 2rem;
+  }
+  > p {
+    font-size: 1.5rem;
+    line-height: 3rem;
+  }
+}

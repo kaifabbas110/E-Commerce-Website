@@ -1,0 +1,88 @@
+.bg {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  @media only screen and (max-width: 48em) {
+    background-attachment: scroll;
+  }
+}
+
+.layOut {
+  position: absolute;
+  background-image: linear-gradient(to top, #434649 0%, #00000000 100%);
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+}
+.leftSection {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 70%;
+  padding: 10rem 5rem;
+  color: white;
+  @media only screen and (max-width: 64.0625em) {
+    width: 80%;
+  }
+  @media only screen and (max-width: 48em) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* padding: 6rem; */
+    /* justify-content: center; */
+    /* align-items: center; */
+  }
+}
+
+.primary_heading {
+  font-size: 8rem;
+  @media only screen and (max-width: 48em) {
+    font-size: 6rem;
+  }
+}
+.secondary_heading {
+  font-size: 4rem;
+  @media only screen and (max-width: 48em) {
+    font-size: 3rem;
+  }
+  padding: 4rem 0;
+}
+
+.btn {
+  > button {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    outline: none;
+    cursor: pointer;
+    margin-right: 2rem;
+    @media only screen and (max-width: 48em) {
+      /* display: flex; */
+      /* justify-content: center; */
+      /* align-items: center; */
+      /* text-align: center; */
+      font-size: 2rem;
+      width: 100%;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+  }
+}
+.btn_findMore {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+.btn_findMore:hover {
+  transition: 0.3s ease-out;
+  background-color: white;
+  color: black;
+}
+.btn_shopNow:hover {
+  transition: 0.3s ease-out;
+  background-color: black;
+  color: white;
+}
