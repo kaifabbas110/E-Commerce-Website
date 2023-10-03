@@ -1,0 +1,53 @@
+body {
+  position: relative;
+}
+.fullCover {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  position: fixed;
+  /* transform: translate(-50%, -50%); */
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: transparent; */
+  background-color: rgba(0, 0, 0, 0.242);
+  transition: 5s all ease;
+}
+
+.OpenModal {
+  /* height: 30%; */
+  /* width: 50%; */
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem;
+  > * {
+    margin: 1rem 0;
+  }
+  > h1 {
+    font-size: 4rem;
+    color: orangered;
+  }
+  > h3 {
+    font-size: 2rem;
+  }
+}
+.btn {
+  > button {
+    font-size: 2rem;
+    padding: 1rem 4rem;
+    color: white;
+    background-color: black;
+    border: none;
+    margin: 0 2rem;
+  }
+  > button:hover {
+    color: red;
+  }
+}

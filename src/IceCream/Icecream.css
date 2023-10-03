@@ -1,0 +1,32 @@
+.hero {
+  height: 100rem;
+  /* background: yellow; */
+}
+.bgContainer {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  will-change: clip-path;
+  position: fixed;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  /* scrollbar-width: 1px; */
+}
+
+.bgImg {
+  width: 1366px;
+  height: 1366px;
+  /* left: 0px; */
+  transform: translate3d(0px, 0px, 0px) scale(1);
+  /* background: yellow; */
+  display: flex;
+  justify-content: center;
+  > img {
+    position: absolute;
+    top: -453px;
+  }
+}

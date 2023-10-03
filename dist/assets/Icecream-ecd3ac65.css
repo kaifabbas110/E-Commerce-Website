@@ -1,0 +1,1 @@
+.hero{height:100rem}.bgContainer{top:0;left:0;height:100vh;width:100%;overflow:hidden;will-change:clip-path;position:fixed;z-index:-1;display:flex;justify-content:center}.bgImg{width:1366px;height:1366px;transform:translateZ(0) scale(1);display:flex;justify-content:center}.bgImg>img{position:absolute;top:-453px}

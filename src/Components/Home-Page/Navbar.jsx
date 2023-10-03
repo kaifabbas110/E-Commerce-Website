@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../img/logo/main-logo.png";
 import css from "../../CSS/Navbar.module.css";
 import { BagHeart, Person } from "../../../img/logo/Socials";
@@ -8,25 +8,24 @@ import {
   hamburgerToggle,
   addToCartToggle,
   removeFromCart,
-  totalCalculation,
+  toggleLog,
 } from "../../Cart/cartSlice";
 import { Link } from "react-router-dom";
+import { formatPrice } from "../../Utils/formatPrice";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const Navbar = () => {
-  const { Amount, AddToCart, HamburgerState, AddToCartState, Total } =
-    useSelector((store) => store.cart);
+  const {
+    Amount,
+    AddToCart,
+    HamburgerState,
+    AddToCartState,
+    Total,
+    ToggleLog,
+  } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
-  useEffect(() => {
-    // Delayed dispatch of totalCalculation after 10 seconds
-    const delayTotalCalculation = setTimeout(() => {
-      dispatch(totalCalculation());
-    }, 2000);
-
-    // Cleanup function to clear the timers when the component unmounts or when AddToCart changes
-    return () => {
-      clearTimeout(delayTotalCalculation);
-    };
-  }, [AddToCart]);
-
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
+  // const [toggleLog, setToggleLog] = useState(false);
   return (
     <div className={css.header}>
       <div className={css.header_left}>
@@ -37,16 +36,26 @@ const Navbar = () => {
           <Link to="/everything">
             <li className={css.mobileView}>everything</li>
           </Link>
-          <li>women</li>
-          <li>men</li>
-          <li>accessories</li>
+          <Link to="/icecream">
+            <li>women</li>
+          </Link>
+          <Link>
+            <li>men</li>
+          </Link>
+          <Link>
+            <li>accessories</li>
+          </Link>
         </ul>
       </div>
       <div className={css.header_right}>
         <ul className={css.ul_2}>
-          <li>about</li>
-          <li>contact us</li>
-          <li className={css.notHidden}>${Total.toFixed(2)}</li>
+          <Link>
+            <li>about</li>
+          </Link>
+          <Link>
+            <li>contact us</li>
+          </Link>
+          <li className={css.notHidden}>{formatPrice(Total)}</li>
           <li className={`${css.notHidden} ${css.BagHeart}`}>
             <button type="button" onClick={() => dispatch(addToCartToggle())}>
               <BagHeart />
@@ -63,14 +72,48 @@ const Navbar = () => {
               ) : (
                 <span className={css.totalCarts}>{Amount}</span>
               )}
-              {/* <span className={css.totalCarts}>{Amount}</span> */}
             </button>
           </li>
-          <li className={css.person}>
-            <button type="button" onClick={() => dispatch()}>
-              <Person />
-            </button>
-          </li>
+          {user ? (
+            <li className={css.person}>
+              <button type="button">
+                <img
+                  src={user.picture}
+                  alt={user.name}
+                  className={css.userImg}
+                  onClick={() => dispatch(toggleLog())}
+                />
+                {ToggleLog && (
+                  <button
+                    className={css.logOutBtn}
+                    onClick={() =>
+                      logout({
+                        logoutParams: { returnTo: window.location.origin },
+                      })
+                    }
+                    onMouseLeave={() => dispatch(toggleLog())}
+                  >
+                    logout
+                  </button>
+                )}
+              </button>
+            </li>
+          ) : (
+            <li className={css.person}>
+              <button type="button" onClick={() => dispatch(toggleLog())}>
+                <Person className={css.userImg} />
+                {ToggleLog && (
+                  <button
+                    className={css.logOutBtn}
+                    onClick={() => loginWithRedirect()}
+                    onMouseLeave={() => dispatch(toggleLog())}
+                  >
+                    login
+                  </button>
+                )}
+              </button>
+            </li>
+          )}
           <li className={`${css.notHidden} ${css.hamburger}`}>
             <button type="button" onClick={() => dispatch(hamburgerToggle())}>
               <Hamburger />
@@ -87,11 +130,53 @@ const Navbar = () => {
               <Cancel />
             </button>
             <ul>
-              <button type="button">
-                <Person />
-              </button>
+              {user ? (
+                <>
+                  <li>
+                    <button type="button">
+                      <img
+                        src={user.picture}
+                        alt={user.name}
+                        onClick={() => dispatch(toggleLog())}
+                      />
+                    </button>
+                  </li>
+                  {ToggleLog && (
+                    <li
+                      onClick={() =>
+                        logout({
+                          logoutParams: { returnTo: window.location.origin },
+                        })
+                      }
+                    >
+                      logout
+                    </li>
+                  )}
+                </>
+              ) : (
+                <>
+                  <li>
+                    <button type="button" onClick={() => dispatch(toggleLog())}>
+                      <Person />
+                    </button>
+                  </li>
+                  {ToggleLog && (
+                    <li
+                      onClick={() => loginWithRedirect()}
+                      style={{ color: "#307FA5" }}
+                    >
+                      login
+                    </li>
+                  )}
+                </>
+              )}
               <li>
-                <Link to="/everything">everything</Link>
+                <Link
+                  to="/everything"
+                  onClick={() => dispatch(hamburgerToggle())}
+                >
+                  everything
+                </Link>
               </li>
               <li>
                 <a href="#">men</a>
@@ -136,19 +221,16 @@ const Navbar = () => {
                       <div className={css.cartItems_info}>
                         <h3>{items.name}</h3>
                         <span>
-                          {items.quantity} x ${items.price}
+                          {items.quantity} x {formatPrice(items.price)}
                         </span>
                       </div>
                     </div>
                     <button
                       type="button"
                       className={css.AddToCartHide}
-                      onClick={(e) =>
-                        setTimeout(() => {
-                          // console.log(items.id);
-                          dispatch(removeFromCart(items.id));
-                        }, 2000)
-                      }
+                      onClick={(e) => {
+                        dispatch(removeFromCart(items.id));
+                      }}
                     >
                       <Cancel />
                     </button>
@@ -159,10 +241,10 @@ const Navbar = () => {
             <div className={css.lower}>
               <div className={css.lower_1}>
                 <h4>Subtotal:</h4>
-                <span>${Total.toFixed(2)}</span>
+                <span>{formatPrice(Total)}</span>
               </div>
               <div className={css.lower_2}>
-                <Link to="/cartpage">
+                <Link to="/cart">
                   <button
                     type="button"
                     onClick={() => dispatch(addToCartToggle())}
@@ -170,14 +252,26 @@ const Navbar = () => {
                     view cart
                   </button>
                 </Link>
-                <Link to="/checkoutpage">
-                  <button
-                    type="button"
-                    onClick={() => dispatch(addToCartToggle())}
-                  >
-                    checkout
-                  </button>
-                </Link>
+                {user ? (
+                  <Link to="/checkout">
+                    <button
+                      type="button"
+                      onClick={() => dispatch(addToCartToggle())}
+                    >
+                      checkout
+                    </button>
+                  </Link>
+                ) : (
+                  <Link>
+                    <button
+                      type="button"
+                      // onClick={() => dispatch(addToCartToggle())}
+                      onClick={() => loginWithRedirect()}
+                    >
+                      checkout
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

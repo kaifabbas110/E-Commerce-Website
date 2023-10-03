@@ -1,169 +1,213 @@
 .cartContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #f5f7f9;
-  align-items: center;
-  padding: 5rem;
+  margin: 10rem auto;
+  width: 90vw;
+
   > h1 {
-    font-size: 8rem;
-    text-transform: capitalize;
-    padding: 5rem;
+    text-align: center;
+    font-size: 6rem;
+    text-transform: uppercase;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: 5rem;
   }
 }
+.cartItemsTable {
+  margin-inline: auto;
+}
 
-table {
-  width: 100%;
-}
-th {
-  background-color: #fbfbfb;
-  padding: 2rem;
-  border-bottom: 1px solid black;
-}
-tbody {
-  > tr {
-    border-bottom: 1px solid black;
-    > td {
-      > input {
-        text-align: center;
-        width: 8rem;
-        padding: 1rem;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  > td {
+    padding: 0rem;
+  }
+  > :nth-child(2) {
+    height: 10rem;
+    aspect-ratio: 1;
+    > img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  > td {
+    > button {
+      background: transparent;
+
+      > svg {
+        height: 3rem;
+        border: 1px solid black;
+        border-radius: 50%;
+        padding: 0.2rem;
       }
     }
   }
 }
+
+.quantity {
+  display: flex;
+  align-items: center;
+  > span {
+    padding: 0 0.5rem;
+  }
+}
+
 table {
-  text-align: center;
-  font-size: 2rem;
+  width: 100%;
+  height: 100%;
+  background: white;
+  color: black;
   border-collapse: collapse;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+th {
+  background: #4080a8;
+  color: white;
   text-transform: capitalize;
 }
-.tableProduct {
+th,
+td {
   padding: 1rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  > td:nth-child(3) {
-    /* background-color: yellowgreen; */
-    width: 30%;
-    text-align: left;
-    font-size: 1.8rem;
-  }
-  > td > img {
-    height: 8rem;
-    width: 10rem;
-  }
-  > td > button {
-    display: flex;
-    border-radius: 50%;
-    border: 1px solid black;
+}
 
-    > svg {
-      padding: 0.1rem;
-      height: 2rem;
+.attributeTitleMobile {
+  display: none;
+}
+.tableMargin {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.507);
+}
+@media only screen and (max-width: 48em) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    > :nth-child(1) {
+      margin-right: auto;
+    }
+    > :nth-child(2) {
+      margin-left: auto;
     }
   }
-}
-tfoot {
-  position: relative;
-}
-.tfoot {
-  padding: 2rem;
-  display: flex;
-  /* padding: 2rem; */
-  /* width: 100%; */
-  /* align-items: center; */
-  /* justify-content: space-between; */
-  /* flex-direction: row; */
-}
-.tfoot1 {
-  > input {
-    margin-right: 1rem;
-    padding: 0.5rem;
+  table {
+    > tr {
+      border: none;
+    }
   }
-  > button {
-    background-color: #0075be;
-    color: white;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    padding: 1.5rem 2rem;
+  th {
+    display: none;
   }
-}
-.tfoot2 {
-  position: absolute;
-  top: 50%;
-  right: 0%;
-  transform: translate(-50%, -50%);
-  > button {
-    background-color: #0075be;
-    color: white;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    padding: 1rem;
+  td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-}
-
-.cartItems {
-  border: 1px solid black;
+  .attribute::before {
+    content: attr(data-cell) ": ";
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  .tableMargin {
+    display: flex;
+    flex-direction: column;
+    margin: 5rem 0;
+  }
+  .attributeTitleDesktop {
+    display: none;
+  }
+  .attributeTitleMobile {
+    display: inherit;
+  }
 }
 
 .emptyCart {
-  border-top: 0.5rem solid black;
-  width: 100%;
+  margin: 5rem;
   > div {
     display: flex;
-    align-items: center;
-    padding: 2rem;
+    margin-bottom: 4rem;
+    > svg {
+      height: 5rem;
+    }
     > p {
-      font-size: 2rem;
+      font-size: 5rem;
       margin-left: 2rem;
     }
-    > svg {
-      height: 2rem;
-    }
   }
-}
-.returnToShop {
-  /* font-size: 2rem; */
-  text-transform: uppercase;
-  background-color: #0075be;
-  color: white;
-  padding: 1.5rem 2.5rem;
-  margin: 1rem 0;
-  font-weight: bolder;
-}
-
-.cartTotals {
-  text-align: left;
-  background-color: yellow;
-  margin: 5rem 0;
-  margin-left: auto;
-  border: 1px solid black;
-  /* width: 50%; */
-  > tr > td {
-    padding: 3rem;
-  }
-  > tr {
-    padding: 5rem;
-  }
-}
-
-.cartTotals_btn {
-  /* padding: 5rem; */
-  > button {
-    font-size: 4rem;
+  > a > button {
     text-transform: uppercase;
-    background-color: #0075be;
-    width: 100%;
+    font-size: 2.5rem;
+    background-color: #4080a8;
+    color: white;
     padding: 2rem;
   }
 }
-.cartTotals_p {
-  padding: 2rem;
-  /* width: 80%; */
-  /* text-align: center; */
-  border-bottom: 1px solid black;
-  > span {
-    margin-left: 10rem;
+
+.quantityBtn {
+  background-color: #4080a8;
+  color: white;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: none;
+}
+
+.attribute {
+  > td {
+    padding: 0;
+  }
+}
+
+.checkOut {
+  width: fit-content;
+  margin-left: auto;
+  margin-top: 8rem;
+  @media only screen and (max-width: 48em) {
+    margin: 0 auto;
+  }
+  > :first-of-type {
+    border-radius: 0.5rem;
+  }
+
+  > a > button,
+  > button {
+    width: 100%;
+    margin: 2rem 0;
+    background: #4080a8;
+    color: white;
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 1rem;
+  }
+  .checkOutBox {
+    border: 1px solid black;
+    padding: 2rem 4rem;
+    > div {
+      display: flex;
+      justify-content: space-between;
+      > span {
+        text-transform: capitalize;
+        font-size: 2rem;
+      }
+    }
+    > :not(:last-child) {
+      padding-bottom: 1.5rem;
+    }
+    > :nth-child(2) {
+      color: rgba(0, 0, 0, 0.819);
+      border-bottom: 1px solid black;
+    }
+    > :last-child {
+      > span {
+        font-size: 2.5rem;
+        padding: 2rem 0.5rem 0rem;
+      }
+    }
+    > :nth-child(odd) {
+      > span {
+        font-weight: 600;
+      }
+    }
   }
 }

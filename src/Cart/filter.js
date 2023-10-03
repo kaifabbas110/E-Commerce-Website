@@ -55,7 +55,21 @@ export const getCheckedFilterItems = createAsyncThunk(
 const filterSlice = createSlice({
   name: "filter",
   initialState,
-  reducers: {},
+  reducers: {
+    increment: (state, { payload }) => {
+      const itemToIncrement = state.selectedProduct.id === payload.id;
+      if (itemToIncrement) {
+        state.selectedProduct.quantity += 1;
+      }
+    },
+
+    decrement: (state, { payload }) => {
+      const itemToDecrement = state.selectedProduct.id === payload.id;
+      if (itemToDecrement && state.selectedProduct.quantity > 1) {
+        state.selectedProduct.quantity -= 1;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getFilterItems.pending, (state) => {
       state.isLoading = true;
@@ -102,6 +116,7 @@ const filterSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getProductById.fulfilled, (state, { payload }) => {
+      payload.quantity = 1;
       state.selectedProduct = payload;
       state.isLoading = false;
     });
@@ -111,5 +126,5 @@ const filterSlice = createSlice({
   },
 });
 
-export const {} = filterSlice.actions;
+export const { increment, decrement } = filterSlice.actions;
 export default filterSlice.reducer;

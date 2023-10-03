@@ -80,13 +80,15 @@
   /* position: relative; */
 
   @media only screen and (max-width: 48em) {
-    grid-template-columns: repeat(3, minmax(25rem, 35rem));
+    grid-template-columns: repeat(3, minmax(10rem, 35rem));
+    gap: 2rem;
+    /* padding: 5rem 0rem; */
   }
-  @media only screen and (max-width: 31.2em) {
+  @media only screen and (max-width: 31.25em) {
     grid-template-columns: repeat(2, minmax(10rem, 35rem));
   }
-  @media only screen and (max-width: 23.4375em) {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 45rem));
+  @media only screen and (max-width: 20em) {
+    grid-template-columns: minmax(10rem, 38rem);
   }
 }
 .wholecard {
@@ -96,7 +98,7 @@
 
 .card {
   position: relative;
-  > img {
+  > a > img {
     height: 100%;
     width: 100%;
     aspect-ratio: 1/1;
@@ -127,7 +129,7 @@
   text-transform: capitalize;
   > h3 {
     font-size: 2.8rem;
-    color: rgba(0, 0, 0, 0.807);
+    color: rgba(18, 1, 1, 0.807);
   }
   > p {
     text-transform: capitalize;
@@ -137,6 +139,19 @@
   > span {
     color: black;
     font-size: 2rem;
+  }
+}
+.card_stars {
+  padding: 0.2rem 0;
+  /* display: flex; */
+  > * {
+    border: none;
+    stroke: black;
+    stroke-width: 1;
+    height: 2rem;
+    width: 2rem;
+    /* padding: 1rem; */
+    fill: orangered;
   }
 }
 
@@ -279,5 +294,35 @@
   > h1 {
     font-size: 5rem;
     text-transform: uppercase;
+  }
+}
+
+body {
+  position: relative;
+}
+
+.blob {
+  position: absolute;
+  /* top: 50%; */
+  /* left: 50%; */
+  background-image: linear-gradient(to right, white, rgb(114, 8, 114));
+  /* transform: translate(-50%, -50%); */
+  height: 20rem;
+  aspect-ratio: 1;
+  /* z-index: 1; */
+  border-radius: 50%;
+  filter: blur(90px);
+  animation: rotate 20s infinite;
+  /* position: fixed; */
+}
+
+@keyframes rotate {
+  0% {
+    transform-origin: center center; /* Set the rotation center to the center of the blob */
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    /* transform-origin: center center; Set the rotation center to the center of the blob */
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }

@@ -1,38 +1,56 @@
+.mainH1 {
+  display: flex;
+  justify-content: center;
+  font-size: 5rem;
+  margin: 5rem 0;
+}
+
+.navigation {
+  font-size: 2.5rem;
+  padding: 0 2rem;
+  /* background: yellow; */
+  /* margin-left: 5rem; */
+  > a,
+  span {
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.488);
+  }
+}
+.productDetailFlex {
+  display: flex;
+  margin: 5rem 0;
+  justify-content: center;
+  @media only screen and (max-width: 48em) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
 .productDetailGrid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* justify-items: center; */
-  /* align-items: start; */
-  text-align: start;
-  padding: 4rem;
-  background-color: gainsboro;
-  @media only screen and (max-width: 56.25em) {
+
+  @media only screen and (max-width: 48em) {
     display: flex;
-    padding: 4rem 0;
     flex-direction: column;
   }
 }
 .productDetailImg {
-  /* height: 50rem; */
-  /* width: 50vw; */
-  /* border: 1px solid black; */
-  @media only screen and (max-width: 56.25em) {
-    width: 100vw;
-  }
   > img {
     height: 100%;
     width: 100%;
     aspect-ratio: 2/1;
     object-fit: cover;
-    /* @media only screen and (max-width: 56.25em) {
-      width: 100vw;
-    } */
   }
 }
 
 .productDetailInfo {
-  margin-right: auto;
   margin: 0 5rem;
+  /* padding: 2rem 0; */
+
+  @media only screen and (max-width: 48em) {
+    margin: 2rem;
+  }
 
   > :not(:first-child) {
     margin: 1.5rem 0;
@@ -57,11 +75,28 @@
 
 .images {
   display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+  /* flex-shrink: initial; */
+  padding: 1rem;
+  @media only screen and (max-width: 48em) {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    padding: 0rem;
+
+    /* padding: 4rem 0; */
+  }
   > div {
-    height: 10rem;
+    /* margin: 1rem; */
+    /* height: 10rem; */
     border: 1px solid violet;
+    width: 10rem;
+    /* height: 10%; */
+    /* aspect-ratio: 4/0.5; */
     > img {
       height: 100%;
+      width: 100%;
     }
   }
 }
@@ -150,3 +185,36 @@
 .productDetailInfo > :nth-child(5) {
   color: blue !important;
 } */
+
+.productDetailInfoBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  > div {
+    margin-top: 5rem;
+  }
+}
+
+.quantityBtn {
+  display: flex;
+  background: white;
+  > button,
+  span {
+    border: 1px solid black;
+    background: transparent;
+    /* height: 2rem; */
+    font-size: 2rem;
+    padding: 1rem;
+  }
+}
+
+.addToCartBtn {
+  margin-left: 5rem;
+  > button {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    background: black;
+    padding: 1.2rem 2rem;
+    color: white;
+  }
+}

@@ -5,6 +5,9 @@
     margin: 10rem auto;
     font-size: 5rem;
     position: relative;
+    @media only screen and (max-width: 20em) {
+      font-size: 4rem;
+    }
   }
   > h1::after {
     content: "";
@@ -21,24 +24,21 @@
 
 .featureProductGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 25rem));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 26rem));
   gap: 3rem;
   justify-content: center;
   padding: 5rem 2rem;
 
   @media only screen and (max-width: 48em) {
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 28rem));
-    /* padding: 5rem 1rem; */
+    grid-template-columns: repeat(3, minmax(10rem, 35rem));
+    gap: 2rem;
+    /* padding: 5rem 0rem; */
   }
   @media only screen and (max-width: 31.25em) {
-    /* grid-template-columns: repeat(2, minmax(0, 1fr)); */
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 34rem));
-    /* padding: 5rem 1rem; */
+    grid-template-columns: repeat(2, minmax(10rem, 35rem));
   }
-  @media only screen and (max-width: 23.4375em) {
-    /* grid-template-columns: repeat(2, minmax(0, 1fr)); */
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 50rem));
-    padding: 5rem 1rem;
+  @media only screen and (max-width: 20em) {
+    grid-template-columns: minmax(10rem, 38rem);
   }
 }
 .wholeFPcard {
@@ -48,7 +48,7 @@
 
 .FPcard {
   position: relative;
-  > img {
+  > a > img {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -65,7 +65,6 @@
   right: 0;
   border-radius: 50%;
   padding: 1rem;
-  background-color: white;
   margin: 1rem;
   text-align: center;
   display: flex;
@@ -82,7 +81,7 @@
   text-transform: capitalize;
   color: black;
   > h3 {
-    font-size: 2rem;
+    font-size: 2.8rem;
   }
   > p {
     text-transform: capitalize;
@@ -127,4 +126,27 @@
 }
 .hidden {
   display: none;
+}
+
+.scrollTrigger {
+  animation: fromLeft 5s ease-out;
+}
+@keyframes fromLeft {
+  from {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  /* 40% {
+    opacity: 0.5;
+  } */
+  50% {
+    transform: translateX(5rem);
+  }
+  /* 80% {
+    opacity: 0.8;
+  } */
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

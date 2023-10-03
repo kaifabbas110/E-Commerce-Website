@@ -1,150 +1,182 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Home-Page/Navbar";
 import css from "../Cart-Page/CartPage.module.css";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../Home-Page/Footer";
 import { Cancel } from "../../Data/Icons";
 import {
-  updateCartPageItemsQuantity,
+  openModal,
   removeFromCart,
+  closeModal,
+  incrementItemsQuantity,
+  decrementItemsQuantity,
 } from "../../Cart/cartSlice";
 import { BagHeart } from "../../../img/logo/Socials";
 import { Link } from "react-router-dom";
-
+import { formatPrice } from "../../Utils/formatPrice";
+import OpenModal from "../../Utils/OpenModal";
+import { useState } from "react";
+import { User, useAuth0 } from "@auth0/auth0-react";
 const CartPage = () => {
-  const { AddToCart, Total } = useSelector((store) => store.cart);
-
+  const { AddToCart, isOpen, Total } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
-  const handleQuantityChange = (itemId, newQuantity) => {
-    dispatch(updateCartPageItemsQuantity({ id: itemId, newQuantity }));
+
+  // const [itemQuantity, setItemQuantity] = useState(null);
+
+  const handleIncrement = (item) => {
+    dispatch(incrementItemsQuantity(item));
   };
+  const handleDecrement = (item) => {
+    dispatch(decrementItemsQuantity(item));
+  };
+
   const subTotal = (p, q) => {
-    const subTotal = (p * q).toFixed(2);
-    return subTotal;
+    const subTotal = p * q;
+    return formatPrice(subTotal);
   };
+
+  const [itemToRemoveId, setItemToRemoveId] = useState(null); // State to store the item ID to be removed
+
+  const handleRemoveItemClick = (item) => {
+    setItemToRemoveId(item); // Set the item ID to be removed
+    dispatch(openModal());
+  };
+
+  const handleConfirmRemove = () => {
+    if (itemToRemoveId) {
+      // Check if there is an item to remove
+      dispatch(removeFromCart(itemToRemoveId.id)); // Remove the item from the cart
+      dispatch(closeModal());
+      setItemToRemoveId(null); // Reset the state
+    }
+  };
+  const { loginWithRedirect, user } = useAuth0();
   return (
-    <div className={css.mainContainer}>
-      <Navbar />
-      <div className={css.cartContainer}>
-        <h1>cart</h1>
-        {AddToCart.length > 0 ? (
-          <table className={css.cartItems}>
-            <tr>
-              <th>product</th>
-              <th>price</th>
-              <th>quantity</th>
-              <th>subtotal</th>
-            </tr>
-            {AddToCart.map((items) => {
-              return (
-                <tbody key={items.id}>
-                  <tr>
-                    <td className={css.tableProduct}>
-                      <td>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setTimeout(() => {
-                              dispatch(removeFromCart(items.id));
-                            }, 2000)
-                          }
+    <>
+      {isOpen && (
+        <OpenModal
+          onConfirmRemove={handleConfirmRemove}
+          title={itemToRemoveId?.title}
+        />
+      )}
+      <div className={css.mainContainer}>
+        <Navbar />
+        <div className={css.cartContainer}>
+          <h1>my bag ({AddToCart.length})</h1>
+          {AddToCart.length > 0 ? (
+            <table className={css.cartItemsTable}>
+              <thead>
+                <tr>
+                  <th>product</th>
+                  <th>price</th>
+                  <th>quantity</th>
+                  <th>sub total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {AddToCart.map((e) => {
+                  return (
+                    <tr className={css.tableMargin} key={e.id}>
+                      <td className={css.grid}>
+                        {/* <td className={css.displayResp}> */}
+                        <td>
+                          <button
+                            type="button"
+                            onClick={() => dispatch(handleRemoveItemClick(e))}
+                          >
+                            <Cancel />
+                          </button>
+                        </td>
+                        <td>
+                          <img src={e.thumbnail} alt={e.title} />
+                        </td>
+                        {/* </td> */}
+                        <td
+                          data-cell="title"
+                          className={`${css.attribute} ${css.attributeTitleDesktop}`}
                         >
-                          <Cancel />
-                        </button>
+                          {e.title}
+                        </td>
                       </td>
-                      <td>
-                        <img src={items.thumbnail} alt={items.img} />
+                      <td
+                        data-cell="title"
+                        className={`${css.attribute} ${css.attributeTitleMobile}`}
+                      >
+                        {e.title}
                       </td>
-                      <td>
-                        <p>{items.name}</p>
+                      <td data-cell="price" className={css.attribute}>
+                        {formatPrice(e.price)}
                       </td>
-                    </td>
-                    <td>${items.price.toFixed(2)}</td>
-                    <td>
-                      <input
-                        type="number"
-                        name="quantity"
-                        // id={`quantity-${items.id}`}
-                        value={items.quantity}
-                        min={1}
-                        placeholder={items.quantity}
-                        onChange={(e) =>
-                          handleQuantityChange(
-                            items.id,
-                            parseInt(e.target.value, 10) //uses the parseInt function to convert it to an integer using base 10 (decimal). This is necessary because the value of an input field is typically a string, and you want to make sure you're working with an integer.
-                          )
-                        }
-                      />
-                    </td>
-                    <td>${subTotal(items.price, items.quantity)}</td>
-                  </tr>
-                </tbody>
-              );
-            })}
-            <tfoot>
-              <tr>
-                <td>
-                  <div className={css.tfoot}>
-                    <div className={css.tfoot1}>
-                      <input type="text" placeholder="Coupon code" />
-                      <button type="button">apply coupon</button>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div className={css.tfoot2}>
-                    <button type="button">update cart</button>
-                  </div>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-        ) : (
-          <div className={css.emptyCart}>
-            <div>
-              <BagHeart />
-              <p>Your cart is currently empty</p>
+                      <td data-cell="quantity" className={css.attribute}>
+                        <td className={css.quantity}>
+                          <button
+                            type="button"
+                            className={css.quantityBtn}
+                            onClick={() => handleDecrement(e)}
+                          >
+                            <AiOutlineMinus />
+                          </button>
+                          <span>{e.quantity}</span>
+                          <button
+                            type="button"
+                            className={css.quantityBtn}
+                            onClick={() => handleIncrement(e)}
+                          >
+                            <AiOutlinePlus />
+                          </button>
+                        </td>
+                      </td>
+                      <td data-cell="sub total" className={css.attribute}>
+                        {subTotal(e.price, e.quantity)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div className={css.emptyCart}>
+              <div>
+                <BagHeart />
+                <p>Your cart is currently empty</p>
+              </div>
+              <Link to="/everything">
+                <button type="button" className={css.returnToShop}>
+                  return to shop
+                </button>
+              </Link>
             </div>
-            <Link to="/everything">
-              <button type="button" className={css.returnToShop}>
-                return to shop
+          )}
+          <div className={css.checkOut}>
+            <div className={css.checkOutBox}>
+              <div>
+                <span>subTotal:</span>
+                <span>{formatPrice(Total)}</span>
+              </div>
+              <div>
+                <span>shipping fee:</span>
+                <span>{formatPrice(4.99)}</span>
+              </div>
+              <div>
+                <span>order total:</span>
+                <span> {formatPrice(Total + 4.99)}</span>
+              </div>
+            </div>
+            {user ? (
+              <Link to="/checkout">
+                <button type="button">proceed to checkout</button>
+              </Link>
+            ) : (
+              <button type="button" onClick={() => loginWithRedirect()}>
+                login
               </button>
-            </Link>
+            )}
           </div>
-        )}
-        {/* <table className={css.cartTotals}>
-          <th>
-            <tr>
-              <td>
-                <h1>Cart totals</h1>
-              </td>
-            </tr>
-          </th>
-          <tr className={css.cartTotals_p}>
-            <td>
-              <p>Subtotal</p>
-            </td>
-            <td>
-              <span>${Total.toFixed(2)}</span>
-            </td>
-          </tr>
-          <tr className={css.cartTotals_p}>
-            <td>
-              <p>Total</p>
-            </td>
-            <td>
-              <span>${Total.toFixed(2)}</span>
-            </td>
-          </tr>
-          <tr>
-            <td className={css.cartTotals_btn}>
-              <button type="button">checkout</button>
-            </td>
-          </tr>
-        </table> */}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

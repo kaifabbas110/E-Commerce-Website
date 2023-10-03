@@ -1,75 +1,26 @@
-.logoSlider {
-  display: flex;
-  justify-content: space-between;
-  /* justify-content: center; */
-  align-items: center;
-  margin: 8rem 0;
-  overflow: hidden;
-}
-.logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* overflow: hidden; */
-  gap: 5rem;
-  width: 100%;
-  background-color: blue;
-  /* margin: 0 10rem; */
-  position: relative;
-}
-.logo {
-  height: 3rem;
-  position: absolute;
-  /* top: 0%;
-  left: 0%;
-  transform: translateX(50%, -50%); */
-  /* transform: translateX(-100%); */
-  /* margin: 0; */
-  /* animation: slide 5s infinite; */
-}
-.logo:nth-child(even) {
-  transform: translateX(-100%);
-}
-.logoSliderBtn {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  > svg {
-    height: 2rem;
-  }
-}
 .section1 {
   padding: 0 5rem;
+  margin: 10rem 0;
   @media only screen and (max-width: 48em) {
-    /* padding: 0 3rem; */
+    padding: 0 3rem;
   }
 }
 
 .gridCard {
   display: grid;
   grid-template-columns: repeat(3, auto);
-  /* justify-content: center; */
   gap: 2rem;
-  margin-bottom: 10rem;
   @media only screen and (max-width: 48em) {
-    /* padding: 0 15rem; */
     grid-template-columns: repeat(1, auto);
   }
 }
 .cards {
-  /* height: 45rem; */
-  /* max-width: 100%; */
   aspect-ratio: 1/1;
   object-fit: cover;
   position: relative;
   background-size: cover;
-  /* background-repeat: no-repeat; */
-  /* background-position: top; */
-  /* background-position: center center; */
   @media only screen and (max-width: 48em) {
     aspect-ratio: 1.6/1;
-    /* height: 32rem; */
   }
 }
 
@@ -80,11 +31,9 @@
   left: 5%;
   color: white;
   @media only screen and (max-width: 48em) {
-    /* position: relative; */
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* padding: 5rem; */
     bottom: 0%;
     left: 0%;
   }
@@ -108,27 +57,8 @@
 
 .layOut {
   position: absolute;
-  /* top: 0; */
-  /* left: 0; */
-  /* background-color: transparent; */
   background-image: linear-gradient(to top, #292b2d 100%, #00000000 100%);
   opacity: 0.5;
   height: 100%;
   width: 100%;
 }
-
-/* @keyframes slide {
-  25% {
-    transform: translateX(-25rem);
-    transform: ;
-  }
-  50% {
-    transform: translateX(-50rem);
-  }
-  75% {
-    transform: translateX(-75rem);
-  }
-  100% {
-    transform: translateX(-100rem);
-  }
-} */

@@ -6,4 +6,8 @@ export const formatPrice = (number) => {
   return newNumber;
 };
 
-formatPrice(12345);
+// console.log(formatPrice(12345));
+
+// const coverUsdToPkr =()=>{
+//   const convert = Intl.NumberFormat()
+// }

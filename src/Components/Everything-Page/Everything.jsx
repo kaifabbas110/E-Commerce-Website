@@ -1,32 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 import css from "../Everything-Page/Everything.module.css";
 import Navbar from "../Home-Page/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { showCartOnHover, addToCart } from "../../Cart/cartSlice";
-import { BagHeart } from "../../../img/logo/Socials";
 import { ArrowRight } from "../../Data/Icons";
-import {
-  getFilterItems,
-  getCheckedFilterItems,
-  getProductById,
-} from "../../Cart/filter";
+import { getFilterItems, getCheckedFilterItems } from "../../Cart/filter";
 import Footer from "../Home-Page/Footer";
 import { formatPrice } from "../../Utils/formatPrice";
-import { Link } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
+import Card from "./Card";
 
 const Everything = () => {
-  const { CartOnHover } = useSelector((store) => store.cart);
   const { FilteredItems, FilterSection, maxPrice, minPrice, isLoading } =
     useSelector((state) => state.filter);
   const dispatch = useDispatch();
-
-  const mouseEnter = (id) => {
-    dispatch(showCartOnHover(id));
-  };
-
-  const mouseLeave = (id) => {
-    dispatch(showCartOnHover(null));
-  };
 
   const [filter, setFilter] = useState({});
   const changeHandler = (e, name, options) => {
@@ -43,6 +29,9 @@ const Everything = () => {
 
   useEffect(() => {
     dispatch(getFilterItems());
+    return () => {
+      return;
+    };
   }, []);
 
   const [searchInput, setSearchInput] = useState("");
@@ -109,156 +98,150 @@ const Everything = () => {
       ? searchResults.slice(startIndex, endIndex)
       : currentFilteredItems;
 
-  return (
-    <div className={css.mainEverything}>
-      <Navbar />
-      <div className={css.everything}>
-        <div className={css.filterSection}>
-          <div className={css.filterSection1}>
-            <input
-              type="search"
-              name="search"
-              id="search"
-              placeholder="Search products..."
-              value={searchInput}
-              onChange={searchHandel}
-            />
-            <button type="button">
-              <ArrowRight />
-            </button>
-          </div>
+  // In Error case, it seems like you're trying to access the blob element before it's rendered in the component.
+  // const blobRef = useRef(null);
 
-          <div className={css.filterSection2}>
-            {FilterSection.map(({ id, name, options }) => (
-              <div key={id} className={css.filterSection2Mobile}>
-                <div>
-                  <h1>categories</h1>
-                </div>
-                {options.map(({ label, value, checked }) => (
-                  <div key={value} className={css.filterSection2Category}>
-                    <label className={css.filterSection2CategoryLabel}>
-                      {label.split("-").join(" ").split("_").join(" ")}
-                    </label>
-                    <input
-                      type="checkbox"
-                      name={value}
-                      id={value}
-                      defaultValue={value}
-                      defaultChecked={checked}
-                      onChange={(e) => {
-                        changeHandler(e, name, options);
-                      }}
-                      className={css.filterSection2CategoryInput}
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-          <div className={css.priceRange}>
-            <div className={css.priceRangeInput}>
+  // useEffect(() => {
+  // Access the blob element and set its style properties
+  // if (blobRef.current) {
+  // const blob = blobRef.current;
+
+  // blob.style.top = `${clientY + scrollY}px`;
+  // blob.style.left = `${clientX}px`;
+  //   document.body.onpointermove = (event) => {
+  //     const { clientX, clientY } = event;
+  //     const scrollY = window.scrollY; // Get the current vertical scroll position
+  //     blob.animate(
+  //       {
+  //         left: `${clientX}px`,
+  //         top: `${clientY + scrollY}px`,
+  //       },
+  //       { duration: 0, fill: "forwards" }
+  //     );
+  //   };
+  // }
+  // }, []);
+
+  return (
+    <>
+      {/* <div ref={blobRef} className={css.blob}></div> */}
+      <div className={css.mainEverything}>
+        <Navbar />
+        <div className={css.everything}>
+          <div className={css.filterSection}>
+            <div className={css.filterSection1}>
               <input
-                type="range"
-                name="range"
-                id="range"
-                min={minPrice}
-                max={maxPrice}
-                step={20}
-                defaultValue={maxPrice}
-                onChange={(e) => priceHandler(e)}
+                type="search"
+                name="search"
+                id="search"
+                placeholder="Search products..."
+                value={searchInput}
+                onChange={searchHandel}
               />
+              <button type="button">
+                <ArrowRight />
+              </button>
             </div>
-            <div className={css.priceRangeValues}>
-              <span>
-                min price:<span>{formatPrice(minPrice)}</span>
-              </span>
-              <span>
-                max price:<span>{formatPrice(max)}</span>
-              </span>
-            </div>
-          </div>
-        </div>
-        {isLoading ? (
-          <div className={css.Loading}>
-            <h1>Loading</h1>
-            <div className={css.buffer}>
-              {[...Array(5)].map((_, i) => (
-                <div key={i}></div>
+
+            <div className={css.filterSection2}>
+              {FilterSection.map(({ id, name, options }) => (
+                <div key={id} className={css.filterSection2Mobile}>
+                  <div>
+                    <h1>categories</h1>
+                  </div>
+                  {options.map(({ label, value, checked }) => (
+                    <div key={value} className={css.filterSection2Category}>
+                      <label className={css.filterSection2CategoryLabel}>
+                        {label.split("-").join(" ").split("_").join(" ")}
+                      </label>
+                      <input
+                        type="checkbox"
+                        name={value}
+                        id={value}
+                        defaultValue={value}
+                        defaultChecked={checked}
+                        onChange={(e) => {
+                          changeHandler(e, name, options);
+                        }}
+                        className={css.filterSection2CategoryInput}
+                      />
+                    </div>
+                  ))}
+                </div>
               ))}
             </div>
+            <div className={css.priceRange}>
+              <div className={css.priceRangeInput}>
+                <input
+                  type="range"
+                  name="range"
+                  id="range"
+                  min={minPrice}
+                  max={maxPrice}
+                  step={20}
+                  defaultValue={maxPrice}
+                  onChange={(e) => priceHandler(e)}
+                />
+              </div>
+              <div className={css.priceRangeValues}>
+                <span>
+                  min price:<span>{formatPrice(minPrice)}</span>
+                </span>
+                <span>
+                  max price:<span>{formatPrice(max)}</span>
+                </span>
+              </div>
+            </div>
           </div>
-        ) : (
-          <div className={css.everythingProduct}>
-            {productsToDisplay.length !== 0 ? (
-              <div className={css.everythingProductGrid}>
-                {productsToDisplay.map(({ id, ...e }) => (
-                  <Link to={`/Product/${id}`} key={id}>
-                    <div className={css.wholecard}>
-                      <div
-                        className={css.card}
-                        onMouseEnter={() => mouseEnter(id)}
-                        onMouseLeave={() => mouseLeave(id)}
-                        onTouchMove={() => mouseEnter(id)}
-                      >
-                        <img
-                          src={e.thumbnail}
-                          alt={e.title}
-                          className={css.hoverImg}
-                        />
-                        {CartOnHover ? (
-                          <button
-                            type="button"
-                            className={` ${
-                              CartOnHover === id ? css.addToCart : css.hidden
-                            }`}
-                            onClick={() => dispatch(addToCart({ id, ...e }))}
-                          >
-                            <BagHeart />
-                          </button>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      <div className={css.card_info}>
-                        <h3>{e.title}</h3>
-                        <p>{e.category}</p>
-                        <span>{formatPrice(e.price)}</span>
-                      </div>
-                    </div>
-                  </Link>
+          {isLoading ? (
+            <div className={css.Loading}>
+              <h1>Loading</h1>
+              <div className={css.buffer}>
+                {[...Array(5)].map((_, i) => (
+                  <div key={i}></div>
                 ))}
               </div>
-            ) : (
-              <div className={css.noResult}>
-                <h1>no result! 💩</h1>
-              </div>
-            )}
-            {productsToDisplay.length < 9 ? (
-              ""
-            ) : (
-              <div className={css.pagination}>
-                <button
-                  type="button"
-                  onClick={handlePrevClick}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-                <span>{currentPage}</span>
-                <button
-                  type="button"
-                  onClick={handleNextClick}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+            </div>
+          ) : (
+            <div className={css.everythingProduct}>
+              {productsToDisplay.length !== 0 ? (
+                <div className={css.everythingProductGrid}>
+                  {productsToDisplay.map(({ id, ...e }, i) => (
+                    <Card id={id} e={e} key={id} />
+                  ))}
+                </div>
+              ) : (
+                <div className={css.noResult}>
+                  <h1>no result! 💩</h1>
+                </div>
+              )}
+              {productsToDisplay.length < 9 ? (
+                ""
+              ) : (
+                <div className={css.pagination}>
+                  <button
+                    type="button"
+                    onClick={handlePrevClick}
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  <span>{currentPage}</span>
+                  <button
+                    type="button"
+                    onClick={handleNextClick}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 
