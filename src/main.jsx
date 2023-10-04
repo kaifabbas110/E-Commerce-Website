@@ -24,6 +24,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </AuthWrapper>
       </Provider>
     </Auth0Provider>
-    ,
   </React.StrictMode>
 );

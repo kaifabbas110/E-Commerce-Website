@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { formatPrice } from "../../Utils/formatPrice";
 import OpenModal from "../../Utils/OpenModal";
 import { useState } from "react";
-import { User, useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 const CartPage = () => {
   const { AddToCart, isOpen, Total } = useSelector((store) => store.cart);
   const dispatch = useDispatch();

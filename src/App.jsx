@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { totalCalculation } from "./Cart/cartSlice";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
-import { useAuth0 } from "@auth0/auth0-react";
-import MyContext from "./Components/PrivateRoute/MyContext";
-import AuthWrapper from "./Components/PrivateRoute/AuthWrapper";
 
 const Home = lazy(() => import("./Components/Home-Page/Home"));
 const CartPage = lazy(() => import("./Components/Cart-Page/CartPage"));

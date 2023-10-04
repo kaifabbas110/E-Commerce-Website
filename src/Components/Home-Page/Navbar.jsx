@@ -25,7 +25,10 @@ const Navbar = () => {
   } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
-  // const [toggleLog, setToggleLog] = useState(false);
+  const [loginToCheckout, setLoginToCheckout] = useState(false);
+  const loginToCheckoutModal = () => {
+    dispatch(loginWithRedirect());
+  };
   return (
     <div className={css.header}>
       <div className={css.header_left}>
@@ -78,7 +81,7 @@ const Navbar = () => {
             <li className={css.person}>
               <button type="button">
                 <img
-                  src={user.picture}
+                  src={user?.picture}
                   alt={user.name}
                   className={css.userImg}
                   onClick={() => dispatch(toggleLog())}
@@ -262,15 +265,38 @@ const Navbar = () => {
                     </button>
                   </Link>
                 ) : (
-                  <Link>
-                    <button
-                      type="button"
-                      // onClick={() => dispatch(addToCartToggle())}
-                      onClick={() => loginWithRedirect()}
-                    >
-                      checkout
-                    </button>
-                  </Link>
+                  <>
+                    {loginToCheckout && (
+                      <div className={css.loginToCheckout}>
+                        <div>
+                          <h1>login to checkout</h1>
+                          <div>
+                            <button
+                              type="button"
+                              onClick={() => loginToCheckoutModal()}
+                            >
+                              ok
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setLoginToCheckout(false)}
+                            >
+                              no
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <Link>
+                      <button
+                        type="button"
+                        // onClick={() => dispatch(addToCartToggle())}
+                        onClick={() => setLoginToCheckout(true)}
+                      >
+                        checkout
+                      </button>
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
