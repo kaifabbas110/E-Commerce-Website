@@ -1,0 +1,1 @@
+import{h as s,j as r}from"./index-0a8d59e4.js";const t=()=>{const e=s();return console.log(e),r.jsxs("div",{children:[r.jsx("h1",{children:"Oops!"}),r.jsx("p",{children:"Sorry, an unexpected error has occurred."}),r.jsx("p",{children:r.jsx("i",{children:e.statusText||e.message})})]})};export{t as default};

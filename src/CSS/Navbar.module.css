@@ -11,10 +11,6 @@ a:hover {
 ul {
   list-style-type: none;
 }
-/* svg:not(.hamburger) {
-  height: 2.2rem;
-  fill: white;
-} */
 img {
   height: 5rem;
 }
@@ -27,7 +23,6 @@ img {
   padding: 3rem 2rem;
   color: white;
   position: relative;
-  /* position: fixed; */
   z-index: 99;
   width: 100%;
 }
@@ -36,7 +31,6 @@ img {
 .header_right {
   display: flex;
   align-items: center;
-  /* background-color: yellow; */
   > ul {
     display: flex;
     align-items: center;
@@ -105,7 +99,6 @@ img {
       padding: 5rem;
       border-top: 1px solid black;
       color: red;
-      /* font-weight: bolder; */
 
       > a {
         color: black;
@@ -150,9 +143,6 @@ img {
   display: flex;
   flex-direction: column;
   font-size: 2rem;
-  /* overflow: scroll; */
-
-  /* justify-content: space-between; */
 }
 .upper {
   display: flex;
@@ -228,50 +218,36 @@ img {
 }
 
 .cartItems_info {
-  /* display: flex; */
-  /* justify-content: end; */
-  /* align-items: end; */
   text-align: end;
-
-  /* flex-direction: column; */
   gap: 1rem;
 }
 
 .userImg {
-  /* height: 5rem !important; */
   border-radius: 50%;
-  /* aspect-ratio: 1/1; */
-  /* object-fit: cover; */
 }
 
 .person {
   position: relative;
-  /* background-color: violet; */
 }
 
 .logOutBtn {
-  /* text-align: center; */
   background-color: white;
   padding: 0.5rem 1rem;
-  /* width: 100%; */
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
   text-transform: capitalize;
-  /* display: none; */
 }
 
 .loginToCheckout {
-  /* position: absolute; */
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.19);
   top: 0%;
   left: 0%;
   position: fixed;
-  /* opacity: 0.4; */
 
   > div {
     display: flex;

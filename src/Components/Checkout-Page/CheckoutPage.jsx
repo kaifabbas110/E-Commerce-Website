@@ -6,15 +6,17 @@ import { Link } from "react-router-dom";
 const CheckoutPage = () => {
   const { user } = useAuth0();
   return (
-    <div>
+    <>
       <Navbar />
       <div className={css.checkout}>
         <h1>dear {user.name}</h1>
         <img src={user.picture} />
         <p>you can't checkout anything hehe! 😆</p>
-        <Link to="/">go back to shopping</Link>
+        <Link to="/">
+          <p>go back to shopping</p>
+        </Link>
       </div>
-    </div>
+    </>
   );
 };
 

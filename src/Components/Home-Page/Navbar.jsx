@@ -39,7 +39,7 @@ const Navbar = () => {
           <Link to="/everything">
             <li className={css.mobileView}>everything</li>
           </Link>
-          <Link to="/icecream">
+          <Link>
             <li>women</li>
           </Link>
           <Link>

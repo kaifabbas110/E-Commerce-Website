@@ -1,15 +1,15 @@
+.navbar {
+  position: relative;
+}
+
 .checkout {
-  /* height: 100vh; */
+  /* background: yellow; */
+  min-height: 100vh;
   display: flex;
-  margin: auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   > * {
     margin: 1rem;
   }
@@ -25,9 +25,23 @@
     font-size: 2rem;
   }
   > a {
+    position: relative;
     background: #4080a8;
     font-size: 3rem;
     padding: 1.5rem 2rem;
     border-radius: 5rem;
+    animation: vibrate infinite 0.3s;
+  }
+}
+
+@keyframes vibrate {
+  0% {
+    transform: translateX(-1rem);
+  }
+  50% {
+    transform: translateX(1rem);
+  }
+  100% {
+    transform: translateX(-1rem);
   }
 }

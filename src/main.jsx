@@ -5,9 +5,7 @@ import "./index.css";
 import { store } from "./store.js";
 import { Provider } from "react-redux";
 import { Auth0Provider } from "@auth0/auth0-react";
-import MyContext from "./Components/PrivateRoute/MyContext.jsx";
 import AuthWrapper from "./Components/PrivateRoute/AuthWrapper.jsx";
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Auth0Provider

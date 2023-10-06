@@ -1,8 +1,5 @@
 .SpecialEdition {
   position: relative;
-
-  /* background-image: url("../../img/banner/banner-03.jpg"); */
-  /* background-color: blue; */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -12,9 +9,6 @@
   @media only screen and (max-width: 48em) {
     background-attachment: scroll;
   }
-  /* width: fit-content; */
-  /* height: 100%; */
-  /* width: 100%; */
 }
 .layOut {
   position: absolute;
@@ -55,9 +49,6 @@
   }
   > * {
     margin: 2rem 0;
-    /* margin-left: auto; */
-    /* gap: 8rem; */
-    /* line-height: 10rem; */
   }
 }
 
